@@ -1,0 +1,25 @@
+{% extends 'music/base.html' %}
+
+{% block body %}
+
+<!-- loads the path to your 'stactic' files-->
+{% if all_albums %}	
+<h3>List of Albums :</h3>
+	<ul>
+		{% for album in all_albums %}			
+			<li>
+				<a href="{% url 'music:detail' album.id %}">{{album.album_title}} - {{ album.artist }}</a>
+			
+				<form action= "{% url 'music:album-delete' album.id %}" method="post">
+					
+				<button type="button" class="btn btn-danger btn-sm">
+          			<span class="glyphicon glyphicon-trash"></span>
+        		</button><br>
+        		</form>
+        	</li>	
+		{% endfor %}
+	</ul>
+{% else %}
+	<h3>No Albums</h3>
+{% endif %}		
+{% endblock %}	
